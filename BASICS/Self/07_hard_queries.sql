@@ -30,3 +30,18 @@ where addresses.city='Kolkata' and users.date_of_birth<'1995-01-01';
 select users.name, users.email, addresses.city, addresses.state
 from users
 left join addresses on users.id=addresses.user_id;
+
+-- Create a report containing every user and their pincode. Users without an address should still appear
+select users.name as users, addresses.pincode as pincode
+from  users
+left join addresses on users.id=addresses.user_id;
+
+-- Create a customer report containing every user, along with their city whenever an address is available.
+select users.name as user_name , addresses.city
+from users
+left join addresses on users.id=addresses.user_id;
+
+-- Find users who have no registered address and whose salary is greater than 60000.
+select users.name
+from users  
+
