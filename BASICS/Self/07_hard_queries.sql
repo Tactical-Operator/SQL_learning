@@ -36,12 +36,42 @@ select users.name as users, addresses.pincode as pincode
 from  users
 left join addresses on users.id=addresses.user_id;
 
--- Create a customer report containing every user, along with their city whenever an address is available.
+-- Create a customer report containing every user, along with their city even if the address is unavailable.
 select users.name as user_name , addresses.city
 from users
 left join addresses on users.id=addresses.user_id;
 
 -- Find users who have no registered address and whose salary is greater than 60000.
 select users.name
-from users  
+from users
+left join addresses on users.id=addresses.user_id
+where addresses.user_id is null and users.salary>60000;
 
+-- The operations team wants a list of every address along with the name of the user associated with it.
+-- street | city | state | pincode | name
+select addresses.street,addresses.city,
+addresses.state,addresses.pincode,users.name
+from users
+right join addresses on users.id=addresses.user_id
+order by users.name;
+
+-- The operations team wants all addresses in Bengaluru, together with the name and email of the associated user.
+select addresses.street,addresses.city,
+addresses.state,addresses.pincode,users.name,users.email
+from users
+right join addresses on users.id=addresses.user_id
+where addresses.city='Bengaluru';
+
+-- Generate a report containing every user, but only users who actually have an address should contain address information.
+-- display null those who dont have 
+-- name | city |state | pincode
+
+select users.name,addresses.city,addresses.state,addresses.pincode
+from  users
+left join addresses on users.id=addresses.user_id;
+
+-- Find users who do not have an address but earn more than 70000.
+select users.name
+from users
+left join addresses on users.id=addresses.user_id
+where addresses.user_id is null and users.salary>70000;
