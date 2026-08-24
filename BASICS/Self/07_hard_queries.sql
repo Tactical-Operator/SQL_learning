@@ -31,4 +31,9 @@ from users
 left join addresses on users.id=addresses.user_id
 where addresses.user_id is null or addresses.city='Kolkata';
 
+-- find the users who have an address but do not live in Delhi
+select users.name,addresses.city
+from users
+left join addresses on users.id=addresses.user_id
+where addresses.city !='Delhi';
  
