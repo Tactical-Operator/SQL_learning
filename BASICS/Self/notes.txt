@@ -1,1 +1,2 @@
 complete sql questions by tommorow
+revise sql 2/9/2026

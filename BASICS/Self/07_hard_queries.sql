@@ -36,4 +36,16 @@ select users.name,addresses.city
 from users
 left join addresses on users.id=addresses.user_id
 where addresses.city !='Delhi';
- 
+
+-- Find all female users who either:
+-- have no address, or
+-- live in Mumbai.
+-- name | gender | city
+select users.name, users.gender, addresses.city
+from users
+left join addresses 
+on users.id=addresses.user_id
+where users.gender='female'
+and(
+addresses.user_id is null or addresses.city='Mumbai'
+ );
